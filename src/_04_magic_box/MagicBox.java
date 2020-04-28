@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class MagicBox extends JPanel implements Runnable, MouseListener {
+MediaPalace mp = new MediaPalace();
 
 	/*
 	 * We are going to hide secrets within the magic box. 
@@ -50,9 +51,9 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	private void createUI() {
 		JFrame frame = new JFrame("The Magic Box contains many secrets...");
 		frame.add(this);
+		frame.addMouseListener(this);
 		setPreferredSize(new Dimension(backgroundImage.getWidth(), backgroundImage.getHeight()));
 		frame.pack();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
 
@@ -72,8 +73,20 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(backgroundImage.getRGB(e.getX(), e.getY()));
+		if(backgroundImage.getRGB(e.getX(), e.getY())==-69429) {
+			
+			MediaPalace.Song f = mp.new Song("row.mp3"); 
+			f.play();
+		}
+		else if(backgroundImage.getRGB(e.getX(), e.getY())<=-3000000 && backgroundImage.getRGB(e.getX(), e.getY())>=-4400000) {
+			MediaPalace.Song s = mp.new Song("r.mp3");
+			s.play();
+		}
+		else if(backgroundImage.getRGB(e.getX(), e.getY())==-2113411) {
+			MediaPalace.Song r = mp.new Song("o.mp3");
+			r.play();
+		}
 	}
 
 	@Override

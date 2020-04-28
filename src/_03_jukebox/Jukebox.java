@@ -5,6 +5,10 @@ package _03_jukebox;
  */
 
 
+import java.awt.Dimension;
+import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -12,7 +16,10 @@ import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
@@ -20,15 +27,36 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 /*   If you don't have javazoom.jar in your project, you can download it from here: http://bit.ly/javazoom
  *   Right click your project and add it as a JAR (Under Java Build Path > Libraries).*/
 
-public class Jukebox implements Runnable {
-
+public class Jukebox implements Runnable, ActionListener {
+	Song h = new Song("row.mp3");
+	Song d = new Song("r.mp3");
+	Song o = new Song("o.mp3");
+	JButton button = new JButton();
+	JButton button2 = new JButton();
+	JButton button3 = new JButton();
     public void run() {
 
 		// 1. Find an mp3 on your computer or on the Internet.
 		// 2. Create a Song object for that mp3
 
 		// 3. Play the Song
-
+JFrame frame = new JFrame();
+frame.setVisible(true);
+JPanel pannel = new JPanel();
+frame.add(pannel);
+pannel.add(button);
+pannel.add(button2);
+pannel.add(button3);
+button.setPreferredSize(new Dimension(100,100));
+button2.setPreferredSize(new Dimension(100,100));
+button3.setPreferredSize(new Dimension(100,100));
+button.setText("trash");
+button2.setText("more trash");
+button3.setText("a whole lot of trash");
+button.addActionListener(this);
+button2.addActionListener(this);
+button3.addActionListener(this);
+frame.pack();
 		/*
 		 * 4. Create a user interface for your Jukebox so that the user can to
 		 * choose which song to play. You can use can use a different button for
@@ -44,6 +72,23 @@ public class Jukebox implements Runnable {
 		URL imageURL = getClass().getResource(fileName);
 		Icon icon = new ImageIcon(imageURL);
 		return new JLabel(icon);
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		e.getSource();
+		JButton buttonPressed = (JButton) e.getSource();
+		if (buttonPressed==button) {
+			h.play();
+		}
+		else if (buttonPressed==button2) {
+			d.play();
+		}
+		else if (buttonPressed==button3) {
+			o.play();
+		}
+		
 	}
 
 }
